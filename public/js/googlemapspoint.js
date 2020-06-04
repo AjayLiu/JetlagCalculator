@@ -17,21 +17,36 @@ function initMap(){
 
     // Configure the click listener.
     map.addListener('click', function(mapsMouseEvent) {
-      // Close the current InfoWindow.
-      infoWindow.close();
+      if(!waiting){
+        // Close the current InfoWindow.
+        infoWindow.close();
 
-      // Create a new InfoWindow.
-      infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+
+
+        // GET LOCAL TIME
+        //from point.js
+        var waiting = true;
+        var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
+        WaitResults();
+        function WaitResults(){
+          if(outputCountry == 'undefined'){
+            waiting = true;
+            setTimeout(function(){
+              WaitResults();
+            }, 1);
+          } else {
+            waiting = false;
+            ans = outputCountry + "<br>" + ans;
+            infoWindow.setContent(ans);
+            infoWindow.open(map);
+            outputCountry = 'undefined';
+          }
+        }
+      }
       
       
-      // GET LOCAL TIME
-      //from point.js
-      var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
-      setTimeout(function(){
-        ans = outputCountry + "<br>" + ans;
-        infoWindow.setContent(ans);
-        infoWindow.open(map);
-      }, 10);
 
       
 

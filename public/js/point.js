@@ -1,4 +1,4 @@
-var outputCountry;
+var outputCountry = 'undefined';
 
 function timeAndCountryAt(pos){
     var nowTime = moment.tz(tzlookup(pos.lat(), pos.lng()));
