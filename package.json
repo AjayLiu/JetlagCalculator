@@ -12,11 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "airport-autocomplete-js": "^2.1.2",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "local-reverse-geocoder": "^0.8.0",
     "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31",
     "netlify-lambda": "^1.6.3",
-    "serverless-http": "^2.5.0"
+    "serverless-http": "^2.5.0",
+    "timepicker": "^1.13.10",
+    "tz-lookup": "^6.1.25"
   }
 }

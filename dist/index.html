@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Jetlag Calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/public/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../node_modules/timepicker/jquery.timepicker.css" />
+        <script type="text/javascript" src="../node_modules/timepicker/jquery.timepicker.js"></script>
+        <script src="../node_modules/moment/moment.js"></script>
+        <script src="../node_modules/moment-timezone/builds/moment-timezone-with-data.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head>
+
+    <body>
+        
+        <nav>
+            <ul>
+                <li><a href = "index.html">Home</a></li>                
+                <li><a href = "jetlag_calculator.html">Jetlag Calculator</a></li>
+                <li><a href = "map.html">Map</a></li>                   
+            </ul>
+        </nav>
+        <form>
+            <div class = "inputs">
+                <div class = "inputBlock">
+                    <label> <p>When do you sleep?</p> </label>
+                    <input id="sleepInput" type="text" class="inputBox" />                    
+                </div>
+                <div class = "inputBlock">
+                    <label> <p>When do you want to sleep?</p> </label>
+                    <input id="wishInput" type="text" class="inputBox" />                    
+                </div>       
+            </div>
+            <input type = "button" value="Calculate" id = "calculateButton">                
+        </form>
+        <section class = "result">
+            <p id = "resultTitle">You would experience no jetlag if you were to teleport to:</p>
+            <figure id = "map">
+                <script src = "/public/js/googlemaps.js"></script>
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxjLUvoMGSfvv5jEZQ9SxL25rJ0BzKW-A&callback=initMap">
+                </script>
+            </figure>
+            <p>
+                <strong id = "locations">
+                    
+                </strong>
+            </p>
+        </section>
+
+        
+    </body>
+    <script src = "/public/js/coordinates.js"></script>
+    <script type="text/javascript" src="/public/js/daniel.js"></script>
+</html>
