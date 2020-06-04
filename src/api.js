@@ -1,6 +1,6 @@
 const express = require("express");
 const serverless = require("serverless-http");
-// const moment = require('moment');
+const moment = require('moment');
 
 const app = express();
 const router = express.Router();
@@ -12,9 +12,9 @@ router.get("/", (req, res) => {
 });
 
 
-// router.get("/time", (req, res) => {
-//   res.send(moment().format());
-// });
+router.get("/moment-timezone-with-data.js", (req, res) => {
+  res.send(moment().format());
+});
 
 
 app.use(`/.netlify/functions/api`, router);
