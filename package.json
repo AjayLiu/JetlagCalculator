@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "airport-autocomplete-js": "^2.1.2",
+    "codegrid-js": "git://github.com/hlaw/codegrid-js.git",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "local-reverse-geocoder": "^0.8.0",

@@ -25,10 +25,15 @@ function initMap(){
       
       
       // GET LOCAL TIME
-      var ans = timeAt(mapsMouseEvent.latLng);
-        //from point.js
+      //from point.js
+      var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
+      setTimeout(function(){
+        ans = outputCountry + "<br>" + ans;
+        infoWindow.setContent(ans);
+        infoWindow.open(map);
+      }, 10);
 
-      infoWindow.setContent(ans);
-      infoWindow.open(map);
+      
+
     });
 }

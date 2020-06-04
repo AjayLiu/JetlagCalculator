@@ -19,12 +19,12 @@ $( document ).ready(function() {
 
 
         
-        fetch('https://jetlag.netlify.app/.netlify/functions/api/time')
-        .then(response => response.text())
-        .then((response) => {
-            console.log(response)
-        })
-        .catch(err => console.log(err))
+    // fetch('https://jetlag.netlify.app/.netlify/functions/api/time')
+    // .then(response => response.text())
+    // .then((response) => {
+    //     console.log(response)
+    // })
+    // .catch(err => console.log(err))
 
     AirportInput("autocomplete-airport-1");
     AirportInput("autocomplete-airport-2");
