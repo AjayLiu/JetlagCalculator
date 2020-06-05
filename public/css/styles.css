@@ -86,7 +86,7 @@ label p {
     justify-content: space-evenly;
 }
 
-.result{
+#result{
     margin: 200px 50px;
     font-size: 3rem;
 }

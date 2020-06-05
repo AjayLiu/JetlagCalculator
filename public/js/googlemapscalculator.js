@@ -34,6 +34,8 @@ function initMap(){
       }
     }
 
+    
+
     // GET LOCAL TIME
     //from point.js
     var waiting = true;
@@ -46,11 +48,23 @@ function initMap(){
           WaitResults();
         }, 1);
       } else {
+
+        // Create the event.
+        var event = document.createEvent('Event');
+
+        // Define that the event name is 'calc'.
+        event.initEvent('calc', true, true);
+
+        // target can be any Element or other EventTarget.
+        document.getElementById("calculateListener").dispatchEvent(event);
+
+        
         waiting = false;
         ans = outputCountry;
         infoWindow.setContent(ans);
         infoWindow.open(map, marker);
         markers.push({"marker": marker, "country": ans, "window": infoWindow});
+         
 
         google.maps.event.addListener(infoWindow, 'closeclick', function(){
           if(markers[0]["window"] == infoWindow)
@@ -58,13 +72,14 @@ function initMap(){
           else {
             removeMarker(markers[1]);
           }
-        });
 
+         
+        });
 
         outputCountry = 'undefined';
       }
     }
-    
+
   });
 }
 

@@ -6,7 +6,7 @@ $( document ).ready(function() {
     
     // Listen for the event.
     document.getElementById("calculateListener").addEventListener('calc', function (e) {
-        calculate();
+        setTimeout(calculate, 1);
     }, false);
 
     $('#autocomplete-airport-1').on('input', function() {
@@ -25,7 +25,7 @@ $( document ).ready(function() {
         calculate();
     });
 
-    $(".result").hide();
+    $("#result").hide();
 
     var inverse = false;
     $( "#invertButton" ).click(function() {
@@ -76,9 +76,9 @@ $( document ).ready(function() {
                 document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + depName + " is " + airportMoment.format("hh:mma") + " at " + destName;  
             } 
             
-            $(".result").show();
+            $("#result").show();
                             
-            document.querySelector('.result').scrollIntoView({ 
+            document.getElementById('result').scrollIntoView({ 
                 behavior: 'smooth' 
             });
         }
