@@ -14,8 +14,7 @@ function initMap(){
   map.addListener('click', function(mapsMouseEvent) {
     
     if(markers.length >= 2){
-      markers[0]["marker"].setMap(null);
-      markers.shift();
+      removeMarker(markers[0]);
     }
     // Create a new marker.
     var marker = new google.maps.Marker({
@@ -25,6 +24,16 @@ function initMap(){
 
     var infoWindow = new google.maps.InfoWindow({content: "HI", position: mapsMouseEvent.latLng});
     
+    function removeMarker(m){ 
+      if(m == markers[0]){
+        markers[0]["marker"].setMap(null);
+        markers.shift();
+      } else {
+        markers[1]["marker"].setMap(null);
+        markers.pop();
+      }
+    }
+
     // GET LOCAL TIME
       //from point.js
       var waiting = true;
@@ -41,7 +50,17 @@ function initMap(){
           ans = outputCountry;
           infoWindow.setContent(ans);
           infoWindow.open(map, marker);
-          markers.push({"marker": marker, "country": ans});
+          markers.push({"marker": marker, "country": ans, "window": infoWindow});
+
+          google.maps.event.addListener(infoWindow, 'closeclick', function(){
+            if(markers[0]["window"] == infoWindow)
+              removeMarker(markers[0]);
+            else {
+              removeMarker(markers[1]);
+            }
+          });
+
+
           outputCountry = 'undefined';
         }
       }
