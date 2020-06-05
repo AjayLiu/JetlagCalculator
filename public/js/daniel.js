@@ -7,8 +7,7 @@ $( document ).ready(function() {
     
     
     $('#sleepInput').on('changeTime', function() {
-       
-        
+        calculate();
     });
     
     
@@ -20,12 +19,12 @@ $( document ).ready(function() {
     
     
     $('#wishInput').on('changeTime', function() {
-        
+        calculate();
     });
 
 
 
-    $(".result").hide();
+    $("#result").hide();
 
     $( "#calculateButton" ).click(function() {
         
@@ -83,7 +82,7 @@ $( document ).ready(function() {
         
                 
             } else {
-                $(".result").hide();
+                $("#result").hide();
                 $("#locations").hide(); 
                 $("#map").hide();
                 swal({
@@ -93,19 +92,22 @@ $( document ).ready(function() {
                 });  
             }
 
-            $(".result").show();
+            $("#result").show();
             
-                
-            document.querySelector('.result').scrollIntoView({ 
-                behavior: 'smooth' 
-            }); 
-        } else {
-            swal({
-                title: "Invalid Input!",
-                text: "Looks like you did not fill in all the fields correctly!",
-                icon: "error"
-            });           
-        }
+            setTimeout(function(){
+
+                document.getElementById('result').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }, 100);
+        } 
+        // else {
+        //     swal({
+        //         title: "Invalid Input!",
+        //         text: "Looks like you did not fill in all the fields correctly!",
+        //         icon: "error"
+        //     });           
+        // }
         
     }
 });
