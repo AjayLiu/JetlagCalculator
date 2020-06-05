@@ -1,3 +1,5 @@
+var markers = [];
+
 function initMap(){
 
   // Map options
@@ -10,17 +12,40 @@ function initMap(){
 
   // Configure the click listener.
   map.addListener('click', function(mapsMouseEvent) {
+    
+    if(markers.length >= 2){
+      markers[0]["marker"].setMap(null);
+      markers.shift();
+    }
     // Create a new marker.
     var marker = new google.maps.Marker({
       position:mapsMouseEvent.latLng,
       map:map
     });
 
-    //alert(getReverseGeocodingData(parseFloat(mapsMouseEvent.latLng.lat()), parseFloat(mapsMouseEvent.latLng.lng())));
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content:
-    // });
-    // infoWindow.open(map, marker);
+    var infoWindow = new google.maps.InfoWindow({content: "HI", position: mapsMouseEvent.latLng});
+    
+    // GET LOCAL TIME
+      //from point.js
+      var waiting = true;
+      var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
+      WaitResults();
+      function WaitResults(){
+        if(outputCountry == 'undefined'){
+          waiting = true;
+          setTimeout(function(){
+            WaitResults();
+          }, 1);
+        } else {
+          waiting = false;
+          ans = outputCountry;
+          infoWindow.setContent(ans);
+          infoWindow.open(map, marker);
+          markers.push({"marker": marker, "country": ans});
+          outputCountry = 'undefined';
+        }
+      }
+
   });
 }
 

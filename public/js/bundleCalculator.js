@@ -25,7 +25,7 @@ $( document ).ready(function() {
     //     console.log(response)
     // })
     // .catch(err => console.log(err))
-
+ 
     AirportInput("autocomplete-airport-1");
     AirportInput("autocomplete-airport-2");
 
@@ -55,16 +55,37 @@ $( document ).ready(function() {
     function calculate(){
         var sleepInput = $('#sleepInput').val();
         
+        var isMap = false;
+        
         var userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
         var airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
+        var marker1, marker2;
+        if(markers.length == 2){
+            isMap = true;
+            marker1 = markers[0]["marker"];
+            marker2 = markers[1]["marker"];
+            userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
+            airportMoment = userSleepTime.clone().tz(tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
+        }
+        
         if(userSleepTime.isValid() && airportMoment.isValid()){
-            var depName = checkInputData(1)[3];
-            var destName = checkInputData(2)[3];
+            if(!isMap){                
+                var depName = checkInputData(1)[3];
+                var destName = checkInputData(2)[3];
+            } else {
+                var depName = markers[0]["country"];
+                var destName = markers[1]["country"];
+            }
             if(!inverse){
                 document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + destName + " is " + airportMoment.format("hh:mma") + " at " + depName;            
             } else {
-                userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
-                airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
+                if(!isMap){
+                    userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
+                    airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
+                } else {
+                    userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
+                    airportMoment = userSleepTime.clone().tz(tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
+                }
                 document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + depName + " is " + airportMoment.format("hh:mma") + " at " + destName;  
             } 
             

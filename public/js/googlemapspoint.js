@@ -45,10 +45,6 @@ function initMap(){
           }
         }
       }
-      
-      
-
-      
 
     });
 }
