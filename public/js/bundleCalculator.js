@@ -1,44 +1,31 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 $( document ).ready(function() {
-    // $.ajax({
-    //     url: 'https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json',
-    //     type: 'GET',
-    //     dataType: 'jsonp',
-    //     jsonp: 'jsoncallback',
-    //     data: {
-    //       prox: '41.8842,-87.6388,250',
-    //       mode: 'retrieveAddresses',
-    //       maxresults: '1',
-    //       gen: '9',
-    //       apiKey: '91LVIt9DhnPsvteyvqZUgtMkdQekklz5SHZmMj9RLIU'
-    //     },
-    //     success: function (data) {
-    //       alert(data["Response"]["View"][0]["Result"][0]["Location"]["Address"]["Country"]);
-    //     }
-    // });
 
-
-        
-    // fetch('https://jetlag.netlify.app/.netlify/functions/api/time')
-    // .then(response => response.text())
-    // .then((response) => {
-    //     console.log(response)
-    // })
-    // .catch(err => console.log(err))
- 
     AirportInput("autocomplete-airport-1");
     AirportInput("autocomplete-airport-2");
+    
+    // Listen for the event.
+    document.getElementById("calculateListener").addEventListener('calc', function (e) {
+        calculate();
+    }, false);
+
+    $('#autocomplete-airport-1').on('input', function() {
+        calculate();
+    });
+    $('#autocomplete-airport-2').on('input', function() {
+        calculate();
+    });
 
     $('#sleepInput').timepicker({
         'minTime': '10:00pm',
         'maxTime': '9:30pm',
     });
 
-    $(".result").hide();
-
-    $( "#calculateButton" ).click(function() {
+    $('#sleepInput').on('changeTime', function() {
         calculate();
     });
+
+    $(".result").hide();
 
     var inverse = false;
     $( "#invertButton" ).click(function() {
@@ -56,10 +43,11 @@ $( document ).ready(function() {
         var sleepInput = $('#sleepInput').val();
         
         var isMap = false;
-        
-        var userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
-        var airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
-        var marker1, marker2;
+        var userSleepTime = 'unset', airportMoment = 'unset', marker1, marker2;
+        if(checkInputData(1)[0] != null && checkInputData(2)[0] != null){
+            userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
+            airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
+        }
         if(markers.length == 2){
             isMap = true;
             marker1 = markers[0]["marker"];
@@ -67,8 +55,7 @@ $( document ).ready(function() {
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
             airportMoment = userSleepTime.clone().tz(tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
         }
-        
-        if(userSleepTime.isValid() && airportMoment.isValid()){
+        if(userSleepTime != "unset" && airportMoment != "unset" && userSleepTime.isValid() && airportMoment.isValid()){
             if(!isMap){                
                 var depName = checkInputData(1)[3];
                 var destName = checkInputData(2)[3];
@@ -93,16 +80,16 @@ $( document ).ready(function() {
                             
             document.querySelector('.result').scrollIntoView({ 
                 behavior: 'smooth' 
-            }); 
-        } else {
-            swal({
-                title: "Invalid Input!",
-                text: "Looks like you did not fill in all the fields correctly!",
-                icon: "error"
-            });   
+            });
         }
+        // else {
+        //     swal({
+        //         title: "Invalid Input!",
+        //         text: "Looks like you did not fill in all the fields correctly!",
+        //         icon: "error"
+        //     });   
+        // }
     }
-
 });
 
 

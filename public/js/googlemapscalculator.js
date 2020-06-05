@@ -35,36 +35,36 @@ function initMap(){
     }
 
     // GET LOCAL TIME
-      //from point.js
-      var waiting = true;
-      var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
-      WaitResults();
-      function WaitResults(){
-        if(outputCountry == 'undefined'){
-          waiting = true;
-          setTimeout(function(){
-            WaitResults();
-          }, 1);
-        } else {
-          waiting = false;
-          ans = outputCountry;
-          infoWindow.setContent(ans);
-          infoWindow.open(map, marker);
-          markers.push({"marker": marker, "country": ans, "window": infoWindow});
+    //from point.js
+    var waiting = true;
+    var ans = timeAndCountryAt(mapsMouseEvent.latLng); 
+    WaitResults();
+    function WaitResults(){
+      if(outputCountry == 'undefined'){
+        waiting = true;
+        setTimeout(function(){
+          WaitResults();
+        }, 1);
+      } else {
+        waiting = false;
+        ans = outputCountry;
+        infoWindow.setContent(ans);
+        infoWindow.open(map, marker);
+        markers.push({"marker": marker, "country": ans, "window": infoWindow});
 
-          google.maps.event.addListener(infoWindow, 'closeclick', function(){
-            if(markers[0]["window"] == infoWindow)
-              removeMarker(markers[0]);
-            else {
-              removeMarker(markers[1]);
-            }
-          });
+        google.maps.event.addListener(infoWindow, 'closeclick', function(){
+          if(markers[0]["window"] == infoWindow)
+            removeMarker(markers[0]);
+          else {
+            removeMarker(markers[1]);
+          }
+        });
 
 
-          outputCountry = 'undefined';
-        }
+        outputCountry = 'undefined';
       }
-
+    }
+    
   });
 }
 
