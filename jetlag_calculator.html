@@ -8,6 +8,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="node_modules/timepicker/jquery.timepicker.css" />
         <link rel="stylesheet" type="text/css" href="public/css/airport.css" />
+        <link rel="stylesheet" type="text/css" href="public/css/tabs.css" />
         <script type="text/javascript" src="node_modules/timepicker/jquery.timepicker.min.js"></script>
         <script src="node_modules/moment/moment.js"></script>
         <script src="node_modules/moment-timezone/builds/moment-timezone-with-data.js"></script>
@@ -30,23 +31,48 @@
                 <li><a href = "map.html">Map</a></li>                   
             </ul>
         </nav>
-        <form>
+        <div class = "inputs" style="flex-direction: column;">
+            <div id = "calculateListener" style = "display: none"></div>
+            <div class = "inputBlock" >
+                <label> <p>Time to convert</p> </label>
+                <input id="sleepInput" type="text" class="inputBox" />                    
+            </div>
             
-            <div class = "inputs" style="flex-direction: column;">
-                <div id = "calculateListener" style = "display: none"></div>
-                <div class = "inputBlock" >
-                    <label> <p>Time to convert</p> </label>
-                    <input id="sleepInput" type="text" class="inputBox" />                    
-                </div>
-                <h1>Choose 2 locations to convert</h1>
+            <!-- Tab links -->
+            <div class="tab">
+                <button class="tablinks" id = "defaultOpen" onclick="openCity(event, 'mapInput')">Map</button>
+                <button class="tablinks" onclick="openCity(event, 'cityInput')">Cities</button>
+                <button class="tablinks" onclick="openCity(event, 'airportInput')">Airports</button>
+            </div>
+            
+            <!-- Tab content -->
+            <div id="mapInput" class="tabcontent">
+                <h1>Choose 2 locations to convert timezones</h1>
                 <figure id = "map">
                     <script src = "public/js/googlemapscalculator.js"></script>
                     <script async defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxjLUvoMGSfvv5jEZQ9SxL25rJ0BzKW-A&callback=initMap">
                     </script>
                 </figure>
-                <h1 style = "margin-top: 100px;">or enter 2 airports</h1>
-                <div class = "airportInputs">
+            </div>
+            
+            <div id="cityInput" class="tabcontent">
+                <h1>Enter 2 cities</h1>
+                <div class = "inputPair">
+                    <div class="inputBlock">
+                        <label> <p>Location 1</p> </label>
+                        <input type="search" id="location1" placeholder="Location 1" autocomplete="off"/>
+                    </div> 
+                    <div class="inputBlock">
+                        <label> <p>Location 2</p> </label>
+                        <input type="search" id="location2" placeholder="Location 2" autocomplete="off"/>
+                    </div>   
+                </div>  
+            </div>
+            
+            <div id="airportInput" class="tabcontent">
+                <h1>Enter 2 airports</h1>
+                <div class = "inputPair">
                     <div class="inputBlock">
                         <label> <p>Airport 1</p> </label>
                         <input type="text" id="autocomplete-airport-1" class="inp" placeholder="Flight from" autocomplete="off">
@@ -57,23 +83,12 @@
                         <input type="text" id="autocomplete-airport-2" class="inp" placeholder="Flight to" autocomplete="off">
                         <span class="border"></span>
                     </div>   
-                </div>    
-                <h1 style = "margin-top: 100px;">or enter 2 locations</h1>
-                <div class = "airportInputs">
-                    <div class="inputBlock">
-                        <label> <p>Location 1</p> </label>
-                        <input type="search" id="location1" placeholder="Location 1" autocomplete="off"/>
-                    </div> 
-                    <div class="inputBlock">
-                        <label> <p>Location 2</p> </label>
-                        <input type="search" id="location2" placeholder="Location 2" autocomplete="off"/>
-                    </div>   
-                </div>                          
-            </div>            
-            <!-- <input type = "button" value="Calculate" id = "calculateButton" style="margin-top: 200px;">                 -->
-        </form>
+                </div>  
+            </div>  
+        </div>
+        <script type="text/javascript" src="public/js/tabs.js"></script>                      
         <section id = "result">
-            <p id = "resultTitle">You should try sleeping at: </p>
+            <p id = "resultTitle"></p>
             <input type = "button" value="Invert" id = "invertButton" style="margin-top: 200px;">                
         </section>        
     </body>

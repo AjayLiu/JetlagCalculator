@@ -131,10 +131,13 @@ $( document ).ready(function() {
             } 
             
             $("#result").show();
-                            
-            document.getElementById('result').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+            
+
+            setTimeout(function(){
+                document.getElementById('result').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }, 100);
         }
     }
 });
