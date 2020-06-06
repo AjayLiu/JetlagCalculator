@@ -19,6 +19,7 @@
         <script type="text/javascript" src="public/js/codegrid.js"></script>
         <script type="text/javascript" src="public/js/getCountryNameFromCode.js"></script>
         <script type="text/javascript" src="public/js/point.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
     </head>
 
     <body>
@@ -45,7 +46,7 @@
                     </script>
                 </figure>
                 <h1 style = "margin-top: 100px;">or enter 2 airports</h1>
-                <div id = "airportInputs">
+                <div class = "airportInputs">
                     <div class="inputBlock">
                         <label> <p>Airport 1</p> </label>
                         <input type="text" id="autocomplete-airport-1" class="inp" placeholder="Flight from" autocomplete="off">
@@ -56,9 +57,19 @@
                         <input type="text" id="autocomplete-airport-2" class="inp" placeholder="Flight to" autocomplete="off">
                         <span class="border"></span>
                     </div>   
-                </div>                           
-            </div>
-            
+                </div>    
+                <h1 style = "margin-top: 100px;">or enter 2 locations</h1>
+                <div class = "airportInputs">
+                    <div class="inputBlock">
+                        <label> <p>Location 1</p> </label>
+                        <input type="search" id="location1" placeholder="Location 1" autocomplete="off"/>
+                    </div> 
+                    <div class="inputBlock">
+                        <label> <p>Location 2</p> </label>
+                        <input type="search" id="location2" placeholder="Location 2" autocomplete="off"/>
+                    </div>   
+                </div>                          
+            </div>            
             <!-- <input type = "button" value="Calculate" id = "calculateButton" style="margin-top: 200px;">                 -->
         </form>
         <section id = "result">

@@ -32,6 +32,7 @@ $( document ).ready(function() {
 
     });
 
+
     function calculate(){
         var sleepInput = $('#sleepInput').val();
         var wishInput = $('#wishInput').val();
@@ -110,5 +111,7 @@ $( document ).ready(function() {
         // }
         
     }
+
+    
 });
 

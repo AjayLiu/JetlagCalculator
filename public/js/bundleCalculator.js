@@ -25,6 +25,40 @@ $( document ).ready(function() {
         calculate();
     });
 
+    
+    var placesAutocomplete1 = places({
+        appId: "plLQQQCT75G2",
+        apiKey: "1fe77a2d954857ed055d1f256aa525b6",
+        container: document.querySelector('#location1')
+    });
+    var placesAutocomplete2 = places({
+        appId: "plLQQQCT75G2",
+        apiKey: "1fe77a2d954857ed055d1f256aa525b6",
+        container: document.querySelector('#location2')
+    });
+
+    var loc1 = null, loc2 = null;
+    placesAutocomplete1.on('change', e => {
+        loc1 = {
+            'latlng': e.suggestion.latlng, 
+            'city': e.suggestion.name
+        };
+        calculate();
+    });
+    placesAutocomplete2.on('change', e => {
+        loc2 = {
+            'latlng': e.suggestion.latlng, 
+            'city': e.suggestion.name
+        };
+        calculate();
+    }); 
+    placesAutocomplete1.on('clear', e => {
+        loc1 = null;
+    });
+    placesAutocomplete2.on('clear', e => {
+        loc2 = null;
+    });
+
     $("#result").hide();
 
     var inverse = false;
@@ -42,36 +76,56 @@ $( document ).ready(function() {
     function calculate(){
         var sleepInput = $('#sleepInput').val();
         
-        var isMap = false;
+        var inputMethod = "none";
         var userSleepTime = 'unset', airportMoment = 'unset', marker1, marker2;
         if(checkInputData(1)[0] != null && checkInputData(2)[0] != null){
+            inputMethod = "airports";
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
             airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
         }
         if(markers.length == 2){
-            isMap = true;
+            inputMethod = "map";
             marker1 = markers[0]["marker"];
             marker2 = markers[1]["marker"];
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
             airportMoment = userSleepTime.clone().tz(tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
         }
+        if(loc1 != null && loc2 != null){
+            inputMethod = "locations";
+            userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(loc2.latlng.lat, loc2.latlng.lng));
+            airportMoment = userSleepTime.clone().tz(tzlookup(loc1.latlng.lat, loc1.latlng.lng));
+        }
         if(userSleepTime != "unset" && airportMoment != "unset" && userSleepTime.isValid() && airportMoment.isValid()){
-            if(!isMap){                
-                var depName = checkInputData(1)[3];
-                var destName = checkInputData(2)[3];
-            } else {
-                var depName = markers[0]["country"];
-                var destName = markers[1]["country"];
+            switch(inputMethod){
+                case "airports":
+                    var depName = checkInputData(1)[3];
+                    var destName = checkInputData(2)[3];
+                    break;
+                case "map":
+                    var depName = markers[0]["country"];
+                    var destName = markers[1]["country"];
+                    break;
+                case "locations":
+                    var depName = loc1.city;
+                    var destName = loc2.city;
+                    break;
             }
             if(!inverse){
                 document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + destName + " is " + airportMoment.format("hh:mma") + " at " + depName;            
             } else {
-                if(!isMap){
-                    userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
-                    airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
-                } else {
-                    userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
-                    airportMoment = userSleepTime.clone().tz(tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
+                switch(inputMethod){
+                    case "airports":
+                        userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
+                        airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
+                        break;
+                    case "map":
+                        userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
+                        airportMoment = userSleepTime.clone().tz(tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
+                        break;
+                    case "locations":
+                        userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(loc1.latlng.lat, loc1.latlng.lng));
+                        airportMoment = userSleepTime.clone().tz(tzlookup(loc2.latlng.lat, loc2.latlng.lng));
+                        break;
                 }
                 document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + depName + " is " + airportMoment.format("hh:mma") + " at " + destName;  
             } 
@@ -82,13 +136,6 @@ $( document ).ready(function() {
                 behavior: 'smooth' 
             });
         }
-        // else {
-        //     swal({
-        //         title: "Invalid Input!",
-        //         text: "Looks like you did not fill in all the fields correctly!",
-        //         icon: "error"
-        //     });   
-        // }
     }
 });
 
