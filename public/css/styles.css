@@ -118,9 +118,11 @@ label p {
 }
 
 #result{
-    margin: 200px 50px;
+    margin: 200px auto;
     font-size: xx-large;
 }
+
+
 
 #map{
    height:400px;
@@ -148,10 +150,12 @@ footer{
     background-color: rgb(206, 206, 206);
     text-align: center;
 }
+
+
 @media screen and (max-width: 600px) {
     .inputs{
         flex-direction: column;
-        width: 80%;
+        width: 100%;
         margin: auto;
     }
     .inputBlock{
@@ -164,5 +168,9 @@ footer{
     .quote{
         font-size: large;
         height: 5vh;
+    }
+
+    #map{
+        width: 90vw;
     }
 }
