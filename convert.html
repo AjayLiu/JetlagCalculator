@@ -21,7 +21,7 @@
         <script src="node_modules/tz-lookup/tz.js"></script>
         <script type="text/javascript" src="public/js/codegrid.js"></script>
         <script type="text/javascript" src="public/js/getCountryNameFromCode.js"></script>
-        <script type="text/javascript" src="public/js/point.js"></script>
+        <script type="text/javascript" src="public/js/map.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
     </head>
 
@@ -61,7 +61,7 @@
             
             <!-- Tab content -->
             <div id="mapInput" class="tabcontent">
-                <h1>Choose 2 locations to convert timezones</h1>
+                <h1>Choose origin and destination</h1>
                 <figure id = "map">
                     <script src = "public/js/googlemapscalculator.js"></script>
                     <script async defer
@@ -71,29 +71,29 @@
             </div>
             
             <div id="cityInput" class="tabcontent">
-                <h1>Enter 2 cities</h1>
+                <h1>Choose origin and destination city</h1>
                 <div class = "inputPair">
                     <div class="inputBlock">
-                        <label> <p>Location 1</p> </label>
-                        <input type="search" id="location1" placeholder="Location 1" autocomplete="off"/>
+                        <label> <p>From</p> </label>
+                        <input type="search" id="location1" placeholder="ex: San Jose" autocomplete="off"/>
                     </div> 
                     <div class="inputBlock">
-                        <label> <p>Location 2</p> </label>
-                        <input type="search" id="location2" placeholder="Location 2" autocomplete="off"/>
+                        <label> <p>To</p> </label>
+                        <input type="search" id="location2" placeholder="ex: London" autocomplete="off"/>
                     </div>   
                 </div>  
             </div>
             
             <div id="airportInput" class="tabcontent">
-                <h1>Enter 2 airports</h1>
+                <h1>Choose origin and destination airports</h1>
                 <div class = "inputPair">
                     <div class="inputBlock">
-                        <label> <p>Airport 1</p> </label>
+                        <label> <p>Departure Airport</p> </label>
                         <input type="text" id="autocomplete-airport-1" class="inp" placeholder="Flight from" autocomplete="off">
                         <span class="border"></span>
                     </div> 
                     <div class="inputBlock">
-                        <label> <p>Airport 2</p> </label>
+                        <label> <p>Destination Airport</p> </label>
                         <input type="text" id="autocomplete-airport-2" class="inp" placeholder="Flight to" autocomplete="off">
                         <span class="border"></span>
                     </div>   

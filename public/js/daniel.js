@@ -67,7 +67,7 @@ $( document ).ready(function() {
                 for(i = 0; i < markers.length; i++){
                     //FORMAT STRING SO America/Los_Angeles turns into Los Angeles etc...
                     var temp = markers[i].content;
-                    var slashPos = temp.indexOf('/');
+                    var slashPos = temp.lastIndexOf('/');
                     if(slashPos > -1){
                         temp = temp.substring(slashPos+1).replace(/_/g, " ");
                         str+=temp+"<br>";

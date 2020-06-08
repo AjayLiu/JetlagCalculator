@@ -119,7 +119,7 @@ $( document ).ready(function() {
                     var destName = loc2.city;
                     break;
             }
-            if(!inverse){
+            if(inverse){
 
                 //IF THERE IS AN ABBREVIATION (ex: PDT, CDT), use it;
                 //IF NOT, just emit it
