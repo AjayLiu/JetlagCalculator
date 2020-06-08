@@ -25,7 +25,17 @@ $( document ).ready(function() {
         calculate();
     });
 
-    
+
+    //WHEN A TAB IS SWITCHED
+    var i;
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].addEventListener("click", function(){
+            $('#result').hide();
+            calculate(true);
+        }, false);
+    }
+
     var placesAutocomplete1 = places({
         appId: "plLQQQCT75G2",
         apiKey: "1fe77a2d954857ed055d1f256aa525b6",
@@ -64,7 +74,7 @@ $( document ).ready(function() {
     var inverse = false;
     $( "#invertButton" ).click(function() {
         inverse = !inverse;
-        calculate(); 
+        calculate();
     });
 
     function checkInputData(id) {
@@ -73,25 +83,24 @@ $( document ).ready(function() {
             "data-lon"), document.getElementById(realId).getAttribute("data-tz"), document.getElementById(realId).getAttribute("data-iata")]);
     }
 
-    function calculate(){
+    
+    function calculate(isSwitchTabs){
+        //default to false
+        isSwitchTabs = isSwitchTabs || false;
+
         var sleepInput = $('#sleepInput').val();
-        
-        var inputMethod = "none";
         var userSleepTime = 'unset', airportMoment = 'unset', marker1, marker2;
-        if(checkInputData(1)[0] != null && checkInputData(2)[0] != null){
-            inputMethod = "airports";
+        if(inputMethod == "airports" && checkInputData(1)[0] != null && checkInputData(2)[0] != null){
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(checkInputData(2)[0], checkInputData(2)[1]));
             airportMoment = userSleepTime.clone().tz(tzlookup(checkInputData(1)[0], checkInputData(1)[1]));
         }
-        if(markers.length == 2){
-            inputMethod = "map";
+        if(inputMethod == "map" && markers.length == 2){            
             marker1 = markers[0]["marker"];
             marker2 = markers[1]["marker"];
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(marker2.getPosition().lat(), marker2.getPosition().lng()));
             airportMoment = userSleepTime.clone().tz(tzlookup(marker1.getPosition().lat(), marker1.getPosition().lng()));
         }
-        if(loc1 != null && loc2 != null){
-            inputMethod = "locations";
+        if(inputMethod == "locations" && loc1 != null && loc2 != null){
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(loc2.latlng.lat, loc2.latlng.lng));
             airportMoment = userSleepTime.clone().tz(tzlookup(loc1.latlng.lat, loc1.latlng.lng));
         }
@@ -132,12 +141,13 @@ $( document ).ready(function() {
             
             $("#result").show();
             
-
-            setTimeout(function(){
-                document.getElementById('result').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            }, 100);
+            if(!isSwitchTabs){
+                setTimeout(function(){
+                    document.getElementById('result').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }, 100);
+            }
         }
     }
 });

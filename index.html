@@ -14,30 +14,27 @@
     </head>
 
     <body>
-        
+
         <nav>
             <ul>
                 <li><a href = "index.html">Home</a></li>                
-                <li><a href = "jetlag_calculator.html">Jetlag Calculator</a></li>
+                <li><a href = "calculator.html">Calculator</a></li>
                 <li><a href = "map.html">Map</a></li>                   
             </ul>
         </nav>
-        <div class = "banner">
-            <div class = "quote">
-                "My sleep schedule is messed up to the point that I wake up at the same time as people in Japan. How about you?"
+        <div class = "quote">
+            "My sleep schedule is messed up to the point that I wake up at the same time as people in Japan. How about you?"
+        </div>
+        <div class = "inputs">
+            <div class = "inputBlock">
+                <label> <p>When do you usually sleep?</p> </label>
+                <input id="sleepInput" type="text" class="inputBox" />                    
             </div>
-            <div class = "inputs">
-                <div class = "inputBlock">
-                    <label> <p>When do you usually sleep?</p> </label>
-                    <input id="sleepInput" type="text" class="inputBox" />                    
-                </div>
-                <div class = "inputBlock">
-                    <label> <p>When is your ideal sleep time?</p> </label>
-                    <input id="wishInput" type="text" class="inputBox" />                    
-                </div>       
-            </div>
-        </div>        
-        
+            <div class = "inputBlock">
+                <label> <p>When is your ideal sleep time?</p> </label>
+                <input id="wishInput" type="text" class="inputBox" />                    
+            </div>       
+        </div>
         <section id = "result">
             <p id = "resultTitle">You would experience no jetlag if you were to teleport to:</p>
             <figure id = "map">
@@ -51,9 +48,11 @@
                     
                 </strong>
             </p>
-        </section>
-
+        </section>        
         
+        <footer>
+            © 2020 Ajay Liu. All Rights Reserved • <a href = "https://mail.google.com/mail/?view=cm&fs=1&to=contact@ajayliu.com" class="mail">contact@ajayliu.com</a>
+        </footer>
     </body>
     <script src = "public/js/coordinates.js"></script>
     <script type="text/javascript" src="public/js/daniel.js"></script>

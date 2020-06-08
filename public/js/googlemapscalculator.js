@@ -10,9 +10,15 @@ function initMap(){
   // New map
   var map = new google.maps.Map(document.getElementById('map'), options);
 
+  // Create the initial InfoWindow.
+  var startWindow = new google.maps.InfoWindow(
+    {content: 'Click on 2 locations to convert their timezones!', position: {lat: 30, lng: 0}});
+  startWindow.open(map);
+
   // Configure the click listener.
   map.addListener('click', function(mapsMouseEvent) {
-    
+    startWindow.close();
+
     if(markers.length >= 2){
       removeMarker(markers[0]);
     }

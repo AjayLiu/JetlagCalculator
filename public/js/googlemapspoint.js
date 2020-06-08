@@ -14,7 +14,7 @@ function initMap(){
     var infoWindow = new google.maps.InfoWindow(
         {content: 'Click the map to get the local time there!', position: myLatlng});
     infoWindow.open(map);
-
+ 
     // Configure the click listener.
     map.addListener('click', function(mapsMouseEvent) {
       if(!waiting){
