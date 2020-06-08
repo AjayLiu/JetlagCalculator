@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="public/css/styles.css">
+        <link rel="stylesheet" href="public/css/clouds.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="node_modules/timepicker/jquery.timepicker.css" />
         <script type="text/javascript" src="node_modules/timepicker/jquery.timepicker.min.js"></script>
@@ -22,11 +23,21 @@
         <nav>
             <ul>
                 <li><a href = "index.html">Home</a></li>                
-                <li><a href = "calculator.html">Calculator</a></li>
+                <li><a href = "convert.html">Convert</a></li>
                 <li><a href = "map.html">Map</a></li>                   
             </ul>
         </nav>
-        <h1>Click anywhere on the map to get the local time at that place right now!</h1>
+        <div class = "quote">
+            Click anywhere on the map to get the local time at that place right now!
+        </div>
+        <div id="clouds">
+            <div class="cloud x1"></div>
+            <!-- Time for multiple clouds to dance around -->
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+        </div>
         <figure id = "map" style = "padding: auto; margin: 30px auto 0 auto; width: 70vw; height: 90vh;">
             <script type="text/javascript" src = "public/js/googlemapspoint.js"></script>
             <script async defer

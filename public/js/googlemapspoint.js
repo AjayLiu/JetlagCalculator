@@ -38,7 +38,9 @@ function initMap(){
             }, 1);
           } else {
             waiting = false;
-            ans = outputCountry + "<br>" + ans;
+            if(outputCountry != "NONE"){
+              ans = outputCountry + "<br>" + ans;
+            }
             infoWindow.setContent(ans);
             infoWindow.open(map);
             outputCountry = 'undefined';

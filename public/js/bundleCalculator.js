@@ -120,7 +120,16 @@ $( document ).ready(function() {
                     break;
             }
             if(!inverse){
-                document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + destName + " is " + airportMoment.format("hh:mma") + " at " + depName;            
+
+                //IF THERE IS AN ABBREVIATION (ex: PDT, CDT), use it;
+                //IF NOT, just emit it
+                time1 = userSleepTime.format("hh:mma (zz)");
+                time2 = airportMoment.format("hh:mma (zz)");
+                if(time1.includes("+") || time1.includes("-"))
+                    time1 = userSleepTime.format("hh:mma");
+                if(time2.includes("+") || time2.includes("-"))
+                    time2 = airportMoment.format("hh:mma");
+                document.getElementById("resultTitle").innerHTML = time1 + " at " + destName + " is " + time2 + " at " + depName;            
             } else {
                 switch(inputMethod){
                     case "airports":
@@ -136,7 +145,17 @@ $( document ).ready(function() {
                         airportMoment = userSleepTime.clone().tz(tzlookup(loc2.latlng.lat, loc2.latlng.lng));
                         break;
                 }
-                document.getElementById("resultTitle").innerHTML = userSleepTime.format("hh:mma") + " at " + depName + " is " + airportMoment.format("hh:mma") + " at " + destName;  
+
+                //IF THERE IS AN ABBREVIATION (ex: PDT, CDT), use it;
+                //IF NOT, just emit it
+                time1 = userSleepTime.format("hh:mma (zz)");
+                time2 = airportMoment.format("hh:mma (zz)");
+                if(time1.includes("+") || time1.includes("-"))
+                    time1 = userSleepTime.format("hh:mma");
+                if(time2.includes("+") || time2.includes("-"))
+                    time2 = airportMoment.format("hh:mma");
+
+                document.getElementById("resultTitle").innerHTML = time1 + " at " + depName + " is " + time2 + " at " + destName;  
             } 
             
             $("#result").show();

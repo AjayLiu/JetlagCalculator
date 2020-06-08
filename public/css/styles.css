@@ -19,6 +19,7 @@ body{
 }
 
 h1{
+    
     width: 70vw;
     margin: 20px auto;
 }
@@ -66,21 +67,32 @@ nav ul li a {
 }
 
 .quote{
-    font-style: italic;
+    z-index: 1;
+    position: absolute;    
     margin: 30px;
+    left: 30px; 
+    right: 30px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    top: 5vh;
+    font-style: italic;
     font-size: xx-large;
 }
 
 label {
+    
     font-size: xx-large;
 }
 
 label p {
+    
     margin: 0;
     padding: 50px 0;
 }
 
 .inputs{  
+    z-index: 1;
+
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -133,7 +145,7 @@ footer{
     bottom: 0;
     left: 0;
     padding: 1rem;
-    background-color: #efefef;
+    background-color: rgb(206, 206, 206);
     text-align: center;
 }
 @media screen and (max-width: 600px) {
