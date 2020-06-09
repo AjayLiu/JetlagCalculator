@@ -30,6 +30,9 @@ function openCity(evt, cityName) {
         case 'airportInput':
             inputMethod = "airports";
             break;
+        case 'gmtInput':
+            inputMethod = "gmt";
+            break;
     }
 }
 

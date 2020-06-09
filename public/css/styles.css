@@ -19,7 +19,6 @@ body{
 }
 
 h1{
-    
     width: 70vw;
     margin: 20px auto;
 }
@@ -29,7 +28,7 @@ a{
     text-decoration: none;    
 }
 
-a:hover{
+#bootstrap-overrides a:hover, a:hover{
     text-decoration: underline;
 }
 
@@ -60,10 +59,10 @@ nav li{
     list-style: none;
 }
 
-nav ul li a {
+#bootstrap-overrides nav ul li a, nav ul li a {
     color:white;
     font-weight: bolder;
-    font-size: 1rem;
+    font-size: medium;
 }
 
 .quote{
@@ -105,6 +104,7 @@ label p {
     margin: 50px auto;
 }
 
+
 .inputBox{    
     width: 80%;
     text-align: center;
@@ -116,6 +116,20 @@ label p {
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+
+#gmt1, #gmt2{
+    font-size: xx-large;
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+}
+
+.gmtBlock{
+    font-size: xx-large;
+    margin-top: 50px;
+}
+
 
 #result{
     margin: 200px auto;
