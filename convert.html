@@ -25,9 +25,11 @@
         <script type="text/javascript" src="public/js/codegrid.js"></script>
         <script type="text/javascript" src="public/js/getCountryNameFromCode.js"></script>
         <script type="text/javascript" src="public/js/map.js"></script>
+        <script type="text/javascript" src="public/js/abbreviationList.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     </head>
 
     <body id="bootstrap-overrides">
@@ -110,18 +112,24 @@
                 <h1>Choose origin and destination GMT offsets</h1>
                 <div class = "inputPair">
                     <div class="inputBlock">
+                        <div class="ui-widget tzField">
+                            <label>Origin Timezone Name</label> <input id="tzInput1" type="text" placeholder="ex: Pacific Standard Time">
+                        </div>
+                        <p class = "separator">OR</p>
                         <div class="form-group">
-                            <label class="control-label">Origin Timezone</label><br>
                             <div class = "gmtBlock">
-                                GMT &nbsp<input id = "gmt1" class="form-control" type="number" value="0" min="-12" max="12" step = "0.5"/>
+                                <label>GMT &nbsp</label><input id = "gmt1" class="form-control" type="number" value="0" min="-12" max="12" step = "0.5"/>
                             </div>
                         </div>
                     </div> 
                     <div class="inputBlock">
+                        <div class="ui-widget tzField">
+                            <label>Destination Timezone Name</label> <input id="tzInput2" type="text" placeholder="ex: Eastern Standard Time">
+                        </div>
+                        <p class = "separator">OR</p>
                         <div class="form-group">
-                            <label class="control-label">Destination Timezone</label><br>                            
                             <div class = "gmtBlock">
-                                GMT &nbsp<input id = "gmt2" class="form-control" type="number" value="0" min="-12" max="12" step = "0.5" />
+                                <label>GMT &nbsp</label><input id = "gmt2" class="form-control" type="number" value="0" min="-12" max="12" step = "0.5" />
                             </div>
                         </div>
                     </div>   

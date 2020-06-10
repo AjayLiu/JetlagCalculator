@@ -29,6 +29,15 @@ $( document ).ready(function() {
     });
 
 
+
+    $( "#tzInput1, #tzInput2" ).autocomplete({
+        source: tzLongNames,
+        select: function() {
+            // alert('changed');
+        }
+    });
+
+
     //WHEN A TAB IS SWITCHED
     var i;
     tablinks = document.getElementsByClassName("tablinks");
@@ -108,15 +117,29 @@ $( document ).ready(function() {
             airportMoment = userSleepTime.clone().tz(tzlookup(loc1.latlng.lat, loc1.latlng.lng));
         }
         if(inputMethod == "gmt"){
-            g1 = $("#gmt1").val();
-            g2 = $("#gmt2").val();
-            userSleepTime = moment(sleepInput, "hh:mma");
-            airportMoment = moment(sleepInput, "hh:mma").add(parseFloat(g1)-parseFloat(g2),'hours');
-            if(!isSwitchTabs && sleepInput == ""){
-                swal("Invalid input!", "Make sure to fill out all the input fields!", "error");
+            tz1 = $("#tzInput1").val();
+            tz2 = $("#tzInput2").val();
+            tzIndex1 = tzLongNames.indexOf(tz1);
+            tzIndex2 = tzLongNames.indexOf(tz2);
+
+
+            if(tz1!="" && tz2 != ""){
+                userSleepTime = moment.tz(sleepInput, "hh:mma", tzCodenames[tzIndex2]);
+                airportMoment = userSleepTime.clone().tz(tzCodenames[tzIndex1]);
+                useGMT = false;
+            } else{
+                g1 = $("#gmt1").val();
+                g2 = $("#gmt2").val();
+                userSleepTime = moment(sleepInput, "hh:mma");
+                airportMoment = moment(sleepInput, "hh:mma").add(parseFloat(g1)-parseFloat(g2),'hours');
+                useGMT = true;
+                if(!isSwitchTabs && sleepInput == ""){
+                    swal("Invalid input!", "Make sure to fill out the necessary input fields!", "error");
+                    return;
+                }
             }
         }
-        if(sleepInput != "" && userSleepTime != "unset" && airportMoment != "unset" && (inputMethod == "gmt" || userSleepTime.isValid() && airportMoment.isValid())){
+        if(sleepInput != "" && userSleepTime != "unset" && airportMoment != "unset" && (useGMT || userSleepTime.isValid() && airportMoment.isValid())){
             switch(inputMethod){
                 case "airports":
                     var depName = checkInputData(1)[3];
@@ -131,8 +154,13 @@ $( document ).ready(function() {
                     var destName = loc2.city;
                     break;
                 case "gmt":
-                    var depName = "GMT " + (g1.includes("-") ? "" : "+" ) + g1;
-                    var destName = "GMT " + (g2.includes("-") ? "" : "+") + g2;
+                    if(useGMT){
+                        var depName = "GMT " + (g1.includes("-") ? "" : "+" ) + g1;
+                        var destName = "GMT " + (g2.includes("-") ? "" : "+") + g2;
+                    } else {
+                        var depName = tz1;
+                        var destName = tz2;
+                    }
                     break;
             }
             if(inverse){
@@ -140,9 +168,9 @@ $( document ).ready(function() {
                 //IF NOT, just emit it
                 time1 = userSleepTime.format("hh:mma (zz)");
                 time2 = airportMoment.format("hh:mma (zz)");
-                if(time1.includes("+") || time1.includes("-") || inputMethod == "gmt")
+                if(time1.includes("+") || time1.includes("-") || useGMT)
                     time1 = userSleepTime.format("hh:mma");
-                if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
+                if(time2.includes("+") || time2.includes("-") || useGMT)
                     time2 = airportMoment.format("hh:mma");
                 document.getElementById("resultTitle").innerHTML = time1 + " at " + destName + "<br> = <br>" + time2 + " at " + depName;            
             } else {
@@ -160,20 +188,26 @@ $( document ).ready(function() {
                         airportMoment = userSleepTime.clone().tz(tzlookup(loc2.latlng.lat, loc2.latlng.lng));
                         break;
                     case "gmt":
-                        g1 = $("#gmt1").val();
-                        g2 = $("#gmt2").val();
-                        userSleepTime = moment(sleepInput, "hh:mma");
-                        airportMoment = moment(sleepInput, "hh:mma").subtract(parseFloat(g1)-parseFloat(g2),'hours');
+                        if(useGMT){
+                            g1 = $("#gmt1").val();
+                            g2 = $("#gmt2").val();
+                            userSleepTime = moment(sleepInput, "hh:mma");
+                            airportMoment = moment(sleepInput, "hh:mma").subtract(parseFloat(g1)-parseFloat(g2),'hours');
+                        } else {
+                            userSleepTime = moment.tz(sleepInput, "hh:mma", tzCodenames[tzIndex1]);
+                            airportMoment = userSleepTime.clone().tz(tzCodenames[tzIndex2]);
+                        }
                         break;
                 }
 
                 //IF THERE IS AN ABBREVIATION (ex: PDT, CDT), use it;
                 //IF NOT, just emit it
                 time1 = userSleepTime.format("hh:mma (zz)");
+                alert(moment.tz.zone(tzCodenames[tzIndex1]).abbr(userSleepTime.valueOf()));
                 time2 = airportMoment.format("hh:mma (zz)");
-                if(time1.includes("+") || time1.includes("-") || inputMethod == "gmt")
+                if(time1.includes("+") || time1.includes("-") || useGMT)
                     time1 = userSleepTime.format("hh:mma");
-                if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
+                if(time2.includes("+") || time2.includes("-") || useGMT)
                     time2 = airportMoment.format("hh:mma");
 
                 document.getElementById("resultTitle").innerHTML = time1 + " at " + depName + "<br> = <br>" + time2 + " at " + destName;  

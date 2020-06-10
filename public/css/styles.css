@@ -136,7 +136,21 @@ label p {
     font-size: xx-large;
 }
 
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
 
+.tzField{
+    font-size:xx-large;
+}
+
+.separator{
+    margin-top: 40px;
+    font-size: large;
+}
 
 #map{
    height:400px;
