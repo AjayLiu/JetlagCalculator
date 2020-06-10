@@ -61,20 +61,6 @@ var abbrevs = [
     ]
   },
   {
-    "value": "Pacific Daylight Time",
-    "abbr": "PDT",
-    "offset": -7,
-    "isdst": true,
-    "text": "(UTC-07:00) Pacific Time (US & Canada)",
-    "utc": [
-      "America/Dawson",
-      "America/Los_Angeles",
-      "America/Tijuana",
-      "America/Vancouver",
-      "America/Whitehorse"
-    ]
-  },
-  {
     "value": "Pacific Standard Time",
     "abbr": "PST",
     "offset": -8,
@@ -1411,12 +1397,12 @@ var abbrevs = [
   }
 ]
 
-var tzLongNames = [];
-var tzCodenames = [];
-var i;
-//EXTRACT WANTED INFO INTO ARRAYS
-for(i = 0; i < abbrevs.length; i++){
-  var a = abbrevs[i];
-  tzLongNames.push(abbrevs[i]["value"]);
-  tzCodenames.push(abbrevs[i]["utc"][0]);
-}
+// var tzLongNames = [];
+// var tzCodenames = [];
+// var i;
+// //EXTRACT WANTED INFO INTO ARRAYS
+// for(i = 0; i < abbrevs.length; i++){
+//   var a = abbrevs[i];
+//   tzLongNames.push(abbrevs[i]["value"]);
+//   tzCodenames.push(abbrevs[i]["utc"][0]);
+// }

@@ -1,0 +1,36 @@
+.tzField, .gmtBlock {
+  box-sizing: border-box;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 1em;
+}
+
+.fuzzyResults {
+  display: none;
+  position: static;  
+  width: 450px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: auto;
+
+}
+
+.__autoitem {
+  width: 425px;
+  margin: 0 auto;
+  font-size: medium;
+  cursor: pointer;
+  color: #000;
+  padding: 10px 0;
+}
+
+.__autoitem.selected, .__autoitem.selected:hover {
+  background: #9ac;
+}
+
+.__autoitem:hover {
+  background: #eee;
+}

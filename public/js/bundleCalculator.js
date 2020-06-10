@@ -30,12 +30,16 @@ $( document ).ready(function() {
 
 
 
-    $( "#tzInput1, #tzInput2" ).autocomplete({
-        source: tzLongNames,
-        select: function() {
-            // alert('changed');
-        }
-    });
+    // $( "#tzInput1, #tzInput2" ).autocomplete({
+    //     source: tzLongNames,
+    //     select: function() {
+    //         // alert('changed');
+    //     }
+    // });
+
+    var fuseOptions = { keys: ["value", "abbr"]};
+    var options = {display: "value", key: "abbr", fuseOptions: fuseOptions};
+    $( "#tzInput1, #tzInput2" ).fuzzyComplete(abbrevs, options);
 
 
     //WHEN A TAB IS SWITCHED
@@ -119,14 +123,24 @@ $( document ).ready(function() {
         if(inputMethod == "gmt"){
             tz1 = $("#tzInput1").val();
             tz2 = $("#tzInput2").val();
-            tzIndex1 = tzLongNames.indexOf(tz1);
-            tzIndex2 = tzLongNames.indexOf(tz2);
-
-
+            
+            
             if(tz1!="" && tz2 != ""){
-                userSleepTime = moment.tz(sleepInput, "hh:mma", tzCodenames[tzIndex2]);
-                airportMoment = userSleepTime.clone().tz(tzCodenames[tzIndex1]);
+                //SEARCH FOR THE INDEX
+                var i;
+                for(i = 0; i < abbrevs.length; i++){
+                    if(tz1 == abbrevs[i]["value"]){
+                        tzIndex1 = i;
+                    }
+                    if(tz2 == abbrevs[i]["value"]){
+                        tzIndex2 = i;
+                    }
+                }
+                
+                userSleepTime = moment.tz(sleepInput, "hh:mma", abbrevs[tzIndex2]["utc"][0]);
+                airportMoment = userSleepTime.clone().tz(abbrevs[tzIndex1]["utc"][0]);
                 useGMT = false;
+                
             } else{
                 g1 = $("#gmt1").val();
                 g2 = $("#gmt2").val();
@@ -160,6 +174,15 @@ $( document ).ready(function() {
                     } else {
                         var depName = tz1;
                         var destName = tz2;
+
+                        //change "Standard" to "Daylight" if currently using DST
+                        if(userSleepTime.isDST()){
+                            depName = depName.replace("Standard", "Daylight");
+                        } 
+                        if(airportMoment.isDST()) {
+                            destName = destName.replace("Standard", "Daylight");
+                        }
+
                     }
                     break;
             }
@@ -168,9 +191,9 @@ $( document ).ready(function() {
                 //IF NOT, just emit it
                 time1 = userSleepTime.format("hh:mma (zz)");
                 time2 = airportMoment.format("hh:mma (zz)");
-                if(time1.includes("+") || time1.includes("-") || useGMT)
+                if(time1.includes("+") || time1.includes("-") || inputMethod == "gmt")
                     time1 = userSleepTime.format("hh:mma");
-                if(time2.includes("+") || time2.includes("-") || useGMT)
+                if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
                     time2 = airportMoment.format("hh:mma");
                 document.getElementById("resultTitle").innerHTML = time1 + " at " + destName + "<br> = <br>" + time2 + " at " + depName;            
             } else {
@@ -194,8 +217,8 @@ $( document ).ready(function() {
                             userSleepTime = moment(sleepInput, "hh:mma");
                             airportMoment = moment(sleepInput, "hh:mma").subtract(parseFloat(g1)-parseFloat(g2),'hours');
                         } else {
-                            userSleepTime = moment.tz(sleepInput, "hh:mma", tzCodenames[tzIndex1]);
-                            airportMoment = userSleepTime.clone().tz(tzCodenames[tzIndex2]);
+                            userSleepTime = moment.tz(sleepInput, "hh:mma", abbrevs[tzIndex1]["utc"][0]);
+                            airportMoment = userSleepTime.clone().tz(abbrevs[tzIndex2]["utc"][0]);
                         }
                         break;
                 }
@@ -203,13 +226,14 @@ $( document ).ready(function() {
                 //IF THERE IS AN ABBREVIATION (ex: PDT, CDT), use it;
                 //IF NOT, just emit it
                 time1 = userSleepTime.format("hh:mma (zz)");
-                alert(moment.tz.zone(tzCodenames[tzIndex1]).abbr(userSleepTime.valueOf()));
                 time2 = airportMoment.format("hh:mma (zz)");
-                if(time1.includes("+") || time1.includes("-") || useGMT)
+                if(time1.includes("+") || time1.includes("-") || inputMethod == "gmt")
                     time1 = userSleepTime.format("hh:mma");
-                if(time2.includes("+") || time2.includes("-") || useGMT)
+                if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
                     time2 = airportMoment.format("hh:mma");
 
+
+                
                 document.getElementById("resultTitle").innerHTML = time1 + " at " + depName + "<br> = <br>" + time2 + " at " + destName;  
             } 
             

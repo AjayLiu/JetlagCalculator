@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="node_modules/timepicker/jquery.timepicker.css" />
         <link rel="stylesheet" type="text/css" href="public/css/airport.css" />
         <link rel="stylesheet" type="text/css" href="public/css/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="public/css/fuzzycomplete.css">
 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,8 +29,8 @@
         <script type="text/javascript" src="public/js/abbreviationList.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src = "public/js/fuzzycomplete.js"></script>
+
     </head>
 
     <body id="bootstrap-overrides">
@@ -113,7 +114,8 @@
                 <div class = "inputPair">
                     <div class="inputBlock">
                         <div class="ui-widget tzField">
-                            <label>Origin Timezone Name</label> <input id="tzInput1" type="text" placeholder="ex: Pacific Standard Time">
+                            <label>Origin Timezone Name</label> <input class="form-control" id="tzInput1" type="text" placeholder="ex: Pacific Standard Time" autocomplete="off">
+                            <aside>*The system will automatically handle current daylight savings times; <br>ex: Pacific Standard Time = Pacific Daylight Time</aside>
                         </div>
                         <p class = "separator">OR</p>
                         <div class="form-group">
@@ -122,9 +124,11 @@
                             </div>
                         </div>
                     </div> 
+                    <hr class = horizontalSeparator></hr>
                     <div class="inputBlock">
                         <div class="ui-widget tzField">
-                            <label>Destination Timezone Name</label> <input id="tzInput2" type="text" placeholder="ex: Eastern Standard Time">
+                            <label>Destination Timezone Name</label> <input class="form-control" id="tzInput2" type="text" placeholder="ex: Eastern Standard Time" autocomplete="off">
+                            <aside>*The system will automatically handle current daylight savings times; <br>ex: Eastern Standard Time = Eastern Daylight Time</aside>
                         </div>
                         <p class = "separator">OR</p>
                         <div class="form-group">

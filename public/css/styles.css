@@ -130,6 +130,10 @@ label p {
     margin-top: 50px;
 }
 
+aside{
+    color: orangered;
+    font-size: x-small;
+}
 
 #result{
     margin: 200px auto;
@@ -148,8 +152,12 @@ label p {
 }
 
 .separator{
-    margin-top: 40px;
+    margin-top: 10px;
     font-size: large;
+}
+
+.horizontalSeparator{
+    height:2px;border-width:0;color:gray;background-color:gray;
 }
 
 #map{
