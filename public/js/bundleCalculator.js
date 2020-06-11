@@ -14,8 +14,8 @@ $( document ).ready(function() {
     });
 
     $('#sleepInput').timepicker({
-        'minTime': '10:00pm',
-        'maxTime': '9:30pm',
+        'minTime': '12:00am',
+        'maxTime': '11:30pm',
     });
 
 
@@ -87,22 +87,24 @@ $( document ).ready(function() {
 
     $("#result").hide();
 
-    var inverse = false;
     $( "#invertButton" ).click(function() {
         inverse = !inverse;
         calculate();
     });
-
+    
     function checkInputData(id) {
         var realId = "autocomplete-airport-" + id;
         return ([document.getElementById(realId).getAttribute("data-lat"), document.getElementById(realId).getAttribute(
             "data-lon"), document.getElementById(realId).getAttribute("data-tz"), document.getElementById(realId).getAttribute("data-iata")]);
-    }
-
-    
+        }
+                
+    var inverse = false;
     function calculate(isSwitchTabs){
         //default to false
         isSwitchTabs = isSwitchTabs || false;
+        if(isSwitchTabs){
+            inverse = false;
+        }
 
         var sleepInput = $('#sleepInput').val();
         var userSleepTime = 'unset', airportMoment = 'unset', marker1, marker2;
@@ -120,6 +122,7 @@ $( document ).ready(function() {
             userSleepTime = moment.tz(sleepInput, "hh:mma", tzlookup(loc2.latlng.lat, loc2.latlng.lng));
             airportMoment = userSleepTime.clone().tz(tzlookup(loc1.latlng.lat, loc1.latlng.lng));
         }
+        useGMT = false;
         if(inputMethod == "gmt"){
             tz1 = $("#tzInput1").val();
             tz2 = $("#tzInput2").val();
@@ -156,8 +159,10 @@ $( document ).ready(function() {
         if(sleepInput != "" && userSleepTime != "unset" && airportMoment != "unset" && (useGMT || userSleepTime.isValid() && airportMoment.isValid())){
             switch(inputMethod){
                 case "airports":
+                    
                     var depName = checkInputData(1)[3];
                     var destName = checkInputData(2)[3];
+                    
                     break;
                 case "map":
                     var depName = markers[0]["country"];
@@ -195,7 +200,20 @@ $( document ).ready(function() {
                     time1 = userSleepTime.format("hh:mma");
                 if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
                     time2 = airportMoment.format("hh:mma");
-                document.getElementById("resultTitle").innerHTML = time1 + " at " + destName + "<br> = <br>" + time2 + " at " + depName;            
+                
+                //ex: 3 hours ahead, 12 hours behind, etc
+                hrsDiff = (userSleepTime.utcOffset() - airportMoment.utcOffset()) / 60;                
+                if(hrsDiff == 0){
+                    differenceStr = " has the same time as ";
+                } else if (hrsDiff > 0){
+                    differenceStr = " is " + hrsDiff + " hours ahead of ";
+                } else {
+                    differenceStr = " is " + (-hrsDiff) + " hours behind ";
+                }
+
+                resultStr = time1 + " at " + destName + "<br> is <br>" + time2 + " at " + depName + 
+                "<br><br><br><br>" 
+                + destName + differenceStr + depName;
             } else {
                 switch(inputMethod){
                     case "airports":
@@ -232,11 +250,22 @@ $( document ).ready(function() {
                 if(time2.includes("+") || time2.includes("-") || inputMethod == "gmt")
                     time2 = airportMoment.format("hh:mma");
 
-
-                
-                document.getElementById("resultTitle").innerHTML = time1 + " at " + depName + "<br> = <br>" + time2 + " at " + destName;  
+                //ex: 3 hours ahead, 12 hours behind, etc
+                hrsDiff = (userSleepTime.utcOffset() - airportMoment.utcOffset()) / 60;                
+                if(hrsDiff == 0){
+                    differenceStr = " has the same time as ";
+                } else if (hrsDiff > 0){
+                    differenceStr = " is " + hrsDiff + " hours ahead of ";
+                } else {
+                    differenceStr = " is " + (-hrsDiff) + " hours behind ";
+                }
+                    
+                resultStr = time1 + " at " + depName + "<br> is <br>" + time2 + " at " + destName + "<br><br><br><br>" 
+                + depName + differenceStr + destName;
             } 
-            
+
+
+            document.getElementById("resultTitle").innerHTML = resultStr;             
             $("#result").show();
             
             if(!isSwitchTabs){

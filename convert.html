@@ -57,7 +57,7 @@
             <div id = "calculateListener" style = "display: none"></div>
             <div class = "inputBlock" >
                 <label> <p>Time to convert</p> </label>
-                <input id="sleepInput" type="text" class="inputBox" />                    
+                <input id="sleepInput" type="text" class="inputBox" placeholder="ex: 10:00pm"/>                    
             </div>
             
             <!-- Tab links -->
@@ -65,7 +65,7 @@
                 <button class="tablinks" id = "defaultOpen" onclick="openCity(event, 'mapInput')">Map</button>
                 <button class="tablinks" onclick="openCity(event, 'cityInput')">Cities</button>
                 <button class="tablinks" onclick="openCity(event, 'airportInput')">Airports</button>
-                <button class="tablinks" onclick="openCity(event, 'gmtInput')">GMT</button>
+                <button class="tablinks" onclick="openCity(event, 'gmtInput')">Timezones</button>
             </div>
             
             <!-- Tab content -->
@@ -110,7 +110,7 @@
             </div> 
 
             <div id="gmtInput" class="tabcontent">
-                <h1>Choose origin and destination GMT offsets</h1>
+                <h1>Choose origin and destination timezones</h1>
                 <div class = "inputPair">
                     <div class="inputBlock">
                         <div class="ui-widget tzField">

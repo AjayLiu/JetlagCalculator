@@ -74,9 +74,24 @@ $( document ).ready(function() {
                     }
                 }
                 $("#locations").show(); 
-
-                document.getElementById('locations').innerHTML = str;
                 
+                document.getElementById('locations').innerHTML = str;
+
+
+                sleepDiff = wishInputTime.diff(userSleepTime, "minutes") / 60.0;
+                if(sleepDiff == 0){
+                    sleepDiffStr = "Amazing, you're sleeping right on time!";
+                } else if(Math.abs(sleepDiff) >= 12)
+                {
+                    if(sleepDiff < 0){
+                        sleepDiffStr = "You're sleeping " + (24 + sleepDiff) + " hours too early";
+                    } else {
+                        sleepDiffStr = "You're sleeping " + (24 - sleepDiff) + " hours too late";
+                    }
+                }
+
+                document.getElementById('sleepDifference').innerHTML = sleepDiffStr;
+
                 initMapWithMarkers(markers);
                 
                 $("#map").show();
