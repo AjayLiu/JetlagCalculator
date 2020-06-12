@@ -32,20 +32,23 @@ a{
     text-decoration: underline;
 }
 
+::placeholder {
+    opacity: 0.5;
+}
+
 nav{
     margin: 0;
     padding: 0;
     width: 100%;
     background-color: rgb(67, 167, 224);
-    z-index: 1;
-
+    z-index: 10;
 }
 
 nav ul{
     padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 5vh;
+    margin: 0 auto;
+    width: 70%;
+    height: 50px;
     display: flex;
     flex-direction: row; 
     align-items: center;
@@ -54,15 +57,40 @@ nav ul{
 
 
 nav li{    
+    flex:1;
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+nav img{
+    margin-top: 2px;
+    width: 50px;
+    height: 50px;
 }
 
 #bootstrap-overrides nav ul li a, nav ul li a {
     color:white;
     font-weight: bolder;
     font-size: medium;
+}
+
+
+#frontPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    position: absolute;    
+    margin: 30px;
+    left: 30px; 
+    right: 30px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    top: 5vh;
+    font-size: 5rem;
+    height: 50vh;
 }
 
 .quote{
@@ -139,6 +167,10 @@ aside{
     font-size: xx-large;
 }
 
+#sleepDifference{
+    margin-bottom: 100px;
+}
+
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;
@@ -176,6 +208,59 @@ aside{
     max-height: 200px;
     background-color:#454a58;
 }
+
+.comboDate{
+    display: block;
+}
+
+#calculateCountdown, #calculateAge{
+    width: 300px;
+    margin: auto;
+}
+
+
+
+
+#gallery{
+    display:flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+    width: 98%;
+}
+
+.galleryItem{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display:flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.galleryItem img{
+    margin: 20px;
+    width: 10vw;
+    height: 10vw;
+}
+
+.galleryText{
+    width: 50%;
+    margin: 20px;
+}
+
+.galleryTitle{
+    font-size: 250%;
+    margin-bottom: 15px;
+}
+
+.galleryDescription{
+    font-size: 125%;
+}
+
+
+
+
 footer{
     position: absolute;
     right: 0;
@@ -207,5 +292,13 @@ footer{
 
     #map{
         width: 90vw;
+    }
+
+    .galleryItem{
+        flex-direction: column;
+    }
+    .galleryText{
+        width: 90%;
+        margin: 20px;
     }
 }

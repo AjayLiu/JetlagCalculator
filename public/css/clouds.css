@@ -7,10 +7,9 @@
 *{ margin: 0; padding: 0;}
 
 #clouds{
-	
 	height: 5vh;
 	overflow: hidden;
-	padding-top: 120px;
+	padding-top: 150px;
 	background: #c9dbe9;
 	background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
 	background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);

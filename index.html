@@ -4,26 +4,23 @@
         <title>Jetlag Calculator</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="public/img/logo.png">
+
         <link rel="stylesheet" href="public/css/styles.css">
         <link rel="stylesheet" href="public/css/clouds.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/node_modules/timepicker/jquery.timepicker.css" />
-        <script src ="https://cdn.jsdelivr.net/npm/timepicker/jquery.timepicker.min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-        <script src="/node_modules/moment-timezone/builds/moment-timezone-with-data.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="public/css/home.css">
     </head>
 
     <body>
         <nav>
             <ul>
-                <li><a href = "index.html">Home</a></li>                
-                <li><a href = "convert.html">Convert</a></li>
-                <li><a href = "map.html">Map</a></li>                   
+                <li><a href = "index.html">Home</a></li>     
+                <li><a href = "index.html"><img src = "public/img/logo.png"></a></li>
+                <li><a href = "about.html">About</a></li>                   
             </ul>
         </nav>       
-        <div class = "quote">
-            "My sleep schedule is messed up to the point that I wake up at the same time as people in Japan. How about you?"
+        <div id = "frontPage">
+            Jetlag Calculator
         </div>
         <div id="clouds">
             <div class="cloud x1"></div>
@@ -34,37 +31,57 @@
             <div class="cloud x5"></div>
         </div>
 
-        
-        <div class = "inputs">
-            <div class = "inputBlock">
-                <label> <p>When do you usually sleep?</p> </label>
-                <input id="sleepInput" type="text" class="inputBox" placeholder="ex: 3:00am"/>                    
-            </div>
-            <div class = "inputBlock">
-                <label> <p>When is your ideal sleep time?</p> </label>
-                <input id="wishInput" type="text" class="inputBox" placeholder="ex: 10:00pm"/>                    
-            </div>       
-        </div>
-        <section id = "result">
-            <p id = "sleepDifference"></p>
-            <p id = "resultTitle">You sleep at the same time as people in:</p>
-            <figure id = "map">
-                <script src = "public/js/googlemaps.js"></script>
-                <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxjLUvoMGSfvv5jEZQ9SxL25rJ0BzKW-A&callback=initMap">
-                </script>
-            </figure>
-            <p>
-                <strong id = "locations">
-                    
-                </strong>
-            </p>
-        </section>        
+        <div id = "gallery">
+            <h1>Click to try out some tools:</h1>
+            <a href="sleep.html">
+                <div class = "galleryItem" style = "background-color: #c9e6f3;">
+                    <img src = "public/img/sleep.png">
+                    <div class = "galleryText">
+                        <p class = "galleryTitle">Sleep Zone</p>
+                        <p class = "galleryDescription">find out which time zone you are sleeping in!</p>
+                    </div>
+                </div>
+            </a>
+            <a href="convert.html">
+                <div class = "galleryItem" style = "background-color: #e4c3f1;">
+                    <img src = "public/img/convert.png">
+                    <div class = "galleryText">
+                        <p class = "galleryTitle">Convert</p>
+                        <p class = "galleryDescription">convert time across timezones, cities, and airports</p>
+                    </div>
+                </div>
+            </a>
+            <a href="countdown.html">
+                <div class = "galleryItem" style = "background-color: #cdecbc;">
+                    <img src = "public/img/countdown2.png">
+                    <div class = "galleryText">
+                        <p class = "galleryTitle">Countdown</p>
+                        <p class = "galleryDescription">calculate how much time is left until your big day!</p>
+                    </div>
+                </div>
+            </a>    
+            <a href = "age.html">
+                <div class = "galleryItem" style = "background-color: #eed7ad;">
+                    <img src = "public/img/cake.png">
+                    <div class = "galleryText">
+                        <p class = "galleryTitle">Age Calculator</p>
+                        <p class = "galleryDescription">how old will you be in 2050?</p>
+                    </div>
+                </div>
+            </a>
+            <a href = "map.html">
+                <div class = "galleryItem" style = "background-color: #f1bfbf;">
+                    <img src = "public/img/map.png">
+                    <div class = "galleryText">
+                        <p class = "galleryTitle">Map</p>
+                        <p class = "galleryDescription">find out the local time around the world right now!</p>
+                    </div>
+                </div>
+            </a>
+        </div>        
         
         <footer>
             © 2020 Ajay Liu. All Rights Reserved • <a href = "https://mail.google.com/mail/?view=cm&fs=1&to=contact@ajayliu.com" class="mail">contact@ajayliu.com</a>
         </footer>
     </body>
-    <script src = "public/js/coordinates.js"></script>
-    <script type="text/javascript" src="public/js/daniel.js"></script> 
 </html>

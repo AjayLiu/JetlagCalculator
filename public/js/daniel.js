@@ -84,9 +84,15 @@ $( document ).ready(function() {
                 } else if(Math.abs(sleepDiff) >= 12)
                 {
                     if(sleepDiff < 0){
-                        sleepDiffStr = "You're sleeping " + (24 + sleepDiff) + " hours too early";
+                        sleepDiffStr = "You're sleeping " + (24 + sleepDiff) + " hours earlier than you should be.";
                     } else {
-                        sleepDiffStr = "You're sleeping " + (24 - sleepDiff) + " hours too late";
+                        sleepDiffStr = "You're sleeping " + (24 - sleepDiff) + " hours later than you should be.";
+                    }
+                } else {
+                    if(sleepDiff > 0){
+                        sleepDiffStr = "You're sleeping " + sleepDiff + " hours earlier than you should be.";
+                    } else {
+                        sleepDiffStr = "You're sleeping " + Math.abs(sleepDiff) + " hours later than you should be.";
                     }
                 }
 
