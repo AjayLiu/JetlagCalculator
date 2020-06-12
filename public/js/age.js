@@ -1,5 +1,5 @@
+$("#result").hide();
 $( document ).ready(function() {
-
     $('#birthdayInput').combodate({
         format:"MMM-D-YYYY",
         value: moment().format("MMM-D-YYYY"),
@@ -21,7 +21,7 @@ $( document ).ready(function() {
         birthdayMoment = moment(bdayInput, "MMM-D-YYYY");
         whenMoment = moment(whenInput, "MMM-D-YYYY");
         if(birthdayMoment.isBefore(whenMoment)){
-            document.getElementById('result').innerText = "On " + whenMoment.format("MMMM DD, YYYY") + ", this person will be " + whenMoment.diff(birthdayMoment, "years") + " years old!";
+            document.getElementById('resultTitle').innerText = "On " + whenMoment.format("MMMM DD, YYYY") + ", this person will be " + whenMoment.diff(birthdayMoment, "years") + " years old!";
         } else {
             swal("Invalid input!", "The requested date is earlier than the date of birth!", "error");
         }

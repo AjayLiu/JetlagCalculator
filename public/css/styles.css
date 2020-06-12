@@ -219,7 +219,10 @@ aside{
 }
 
 
-
+#galleryTitle{
+    margin-top: 300px;
+    font-size: 3vw;
+}
 
 #gallery{
     display:flex;
@@ -250,12 +253,12 @@ aside{
 }
 
 .galleryTitle{
-    font-size: 250%;
+    font-size: 3vw;
     margin-bottom: 15px;
 }
 
 .galleryDescription{
-    font-size: 125%;
+    font-size: 2vw;
 }
 
 

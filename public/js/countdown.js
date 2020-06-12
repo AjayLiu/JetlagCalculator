@@ -1,3 +1,4 @@
+$("#result").hide();
 $( document ).ready(function() {
 
     $('#countdownInput').combodate({
@@ -19,7 +20,7 @@ $( document ).ready(function() {
         }, 1000);
         
         function countdownTick(){
-            document.getElementById("result").innerHTML = countdownMoment.countdown().toString() + (countdownMoment.isBefore(moment()) ? " ago." : " remaining.");        
+            document.getElementById("resultTitle").innerHTML = countdownMoment.countdown().toString() + (countdownMoment.isBefore(moment()) ? " ago." : " remaining.");        
         }
 
         $("#result").show();
