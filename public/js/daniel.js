@@ -25,11 +25,8 @@ $( document ).ready(function() {
 
 
     $("#result").hide();
-
-    $( "#calculateButton" ).click(function() {
-        
+    $( "#calculateButton" ).click(function() {        
         calculate();
-
     });
 
 

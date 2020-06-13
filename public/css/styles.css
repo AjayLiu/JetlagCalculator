@@ -221,7 +221,7 @@ aside{
 
 #galleryTitle{
     margin-top: 300px;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 #gallery{
@@ -253,12 +253,13 @@ aside{
 }
 
 .galleryTitle{
-    font-size: 3vw;
+    font-weight: bold;
+    font-size: 2vw;
     margin-bottom: 15px;
 }
 
 .galleryDescription{
-    font-size: 2vw;
+    font-size: 1.5vw;
 }
 
 

@@ -17,7 +17,7 @@ $( document ).ready(function() {
         'minTime': '12:00am',
         'maxTime': '11:30pm',
     });
-
+    $('#sleepInput').timepicker('setTime', new Date());
 
     $('#sleepInput').on('changeTime', function() {
         if(inputMethod != 'gmt')
