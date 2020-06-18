@@ -89,7 +89,7 @@ nav img{
     margin-left: auto; 
     margin-right: auto; 
     top: 5vh;
-    font-size: 5rem;
+    font-size: 5vw;
     height: 50vh;
 }
 
@@ -221,7 +221,7 @@ aside{
 
 #galleryTitle{
     margin-top: 300px;
-    font-size: 2vw;
+    font-size: 125%;
 }
 
 #gallery{
@@ -254,12 +254,12 @@ aside{
 
 .galleryTitle{
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 200%;
     margin-bottom: 15px;
 }
 
 .galleryDescription{
-    font-size: 1.5vw;
+    font-size: 150%;
 }
 
 
