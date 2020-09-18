@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Jetlag Calculator</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="public/img/logo.png">
+  <head>
+    <title>Jetlag Calculator</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="public/img/logo.png" />
 
-        <link rel="stylesheet" href="public/css/styles.css">
-        <link rel="stylesheet" href="public/css/clouds.css">
-        <link rel="stylesheet" href="public/css/home.css">
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="public/css/styles.css" />
+    <link rel="stylesheet" href="public/css/clouds.css" />
+    <link rel="stylesheet" href="public/css/home.css" />
 
-        <script data-ad-client="ca-pub-7898607403121215" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <body>
-        <nav>
-            <ul>
-                <li><a href = "index.html">Home</a></li>     
-                <li><a href = "index.html"><img src = "public/img/logo.png"></a></li>
-                <li><a href = "about.html">About</a></li>                   
-            </ul>
-        </nav>       
-        <div id = "frontPage">
-            Jetlag Calculator
-        </div>
-        <script src = "public/js/frontpage.js"></script>
-        <div id="clouds">
-            <div class="cloud x1"></div>
-            <!-- Time for multiple clouds to dance around -->
-            <div class="cloud x2"></div>
-            <div class="cloud x3"></div>
-            <div class="cloud x4"></div>
-            <div class="cloud x5"></div>
-        </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-178410803-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        <h1 id = "galleryTitle">Click to try out some tools:</h1>
-        <div id = "gallery">
-            
-        </div>        
-        <script src = "public/js/gallery.js"></script>
-        
-        <footer>
-            © 2020 Ajay Liu. All Rights Reserved • <a href = "https://mail.google.com/mail/?view=cm&fs=1&to=contact@ajayliu.com" class="mail">contact@ajayliu.com</a>
-        </footer>
-    </body>
+      gtag("config", "UA-178410803-1");
+    </script>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="index.html"><img src="public/img/logo.png" /></a>
+        </li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div id="frontPage">Jetlag Calculator</div>
+    <script src="public/js/frontpage.js"></script>
+    <div id="clouds">
+      <div class="cloud x1"></div>
+      <!-- Time for multiple clouds to dance around -->
+      <div class="cloud x2"></div>
+      <div class="cloud x3"></div>
+      <div class="cloud x4"></div>
+      <div class="cloud x5"></div>
+    </div>
+
+    <h1 id="galleryTitle">Click to try out some tools:</h1>
+    <div id="gallery"></div>
+    <script src="public/js/gallery.js"></script>
+
+    <footer>
+      © 2020 Ajay Liu. All Rights Reserved •
+      <a
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@ajayliu.com"
+        class="mail"
+        >contact@ajayliu.com</a
+      >
+    </footer>
+  </body>
 </html>
